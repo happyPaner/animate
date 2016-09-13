@@ -55,7 +55,7 @@ Animate.Renderer.prototype = {
         this._ctx.fillStyle = v.fillStyle;
         this._ctx.fill();
 
-        if(v._strokeWidth > 0 && v._strokeOpciaty > 0){
+        if(v.strokeWidth > 0 && v.strokeOpciaty > 0){
             this._ctx.globalAlpha = v.strokeOpciaty;
             this._ctx.strokeStyle = v.strokeStyle;
             this._ctx.lineWidth = v.strokeWidth;

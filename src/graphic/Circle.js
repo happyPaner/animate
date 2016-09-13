@@ -9,10 +9,13 @@ Animate.Circle = function(center, radius, options){
     this.center = center ? center : new Animate.Point(0, 0);
     this.radius = radius ? radius : 10;
     Animate.Graphic.call(this, options);
+    
 }
 
+Animate.extend(Animate.Circle, Animate.Graphic)
+
 //继承图形基础原型
-Animate.Circle.prototype = (new Animate.Graphic()).__proto__
+// Animate.Circle.prototype = new Animate.Graphic();
 
 //重新设置中心点坐标
 Animate.Circle.prototype.setCenter = function(point){

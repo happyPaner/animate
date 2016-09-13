@@ -24,7 +24,11 @@
         var lefttop = new Animate.Point(100, 100)
         var rectangle = new Animate.Rectangle( lefttop, 200, 200 );
         var center = new Animate.Point(500, 100);
-        var circle = new Animate.Circle(center, 100)
+        var circle = new Animate.Circle(center, 100, {
+            strokeWidth : 3,
+            strokeStyle : "#00FF00"
+        })
+        var polygon = new Animate.Polygon()
 
         rectangle.addTo(scene);
         circle.addTo(scene)
@@ -40,7 +44,7 @@
             stats.end();
             requestAnimationFrame(go)
         }
-        go()
+        // go()
     </script>
 </body>
 </html>

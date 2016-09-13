@@ -14,7 +14,7 @@ Animate.Rectangle = function(lefttop, width, height, options){
 }
 
 //继承图形基础原型
-Animate.Rectangle.prototype = (new Animate.Graphic()).__proto__
+Animate.extend(Animate.Rectangle, Animate.Graphic)
 
 //重新设定矩形位置 
 Animate.Rectangle.prototype.setPosition =  function(point){
