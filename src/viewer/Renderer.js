@@ -14,15 +14,7 @@ Animate.Renderer.prototype = {
     render : function(scene){
         this.clear();
         scene.members.forEach(function(v){
-            switch(v.type){
-                case 'rectangle':
-                    this._rectangle(v);
-                    break;
-
-                case 'circle':
-                    this._circle(v);
-                    break;
-            }
+            this._path(v)
         },this)
     },
 
@@ -31,30 +23,37 @@ Animate.Renderer.prototype = {
         this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height)
     },
 
-    //渲染矩形方法
-    _rectangle : function(v){
-        this._ctx.globalAlpha = v.opciaty;
-        this._ctx.fillStyle = v.fillStyle;
-        this._ctx.fillRect(v.lefttop.x, v.lefttop.y, v.width, v.height);
-        if(v._strokeWidth > 0 && v._strokeOpciaty > 0){
-            this._ctx.globalAlpha = v.strokeOpciaty;
-            this._ctx.strokeStyle = v.strokeStyle;
-            this._ctx.lineWidth = v.strokeWidth;
-            this._ctx.strokeRect(v.lefttop.x, v.lefttop.y, v.width, v.height);
+    //渲染路径
+    _path : function(v){
+        var typePoints = v._typePoints;
+        this._ctx.beginPath();
+        for(var i=0, len=typePoints.length; i<len; i++){
+            switch(typePoints[i].type){
+                case 'M'||'m':
+                    this._ctx.moveTo(typePoints[i].point.x, typePoints[i].point.y);
+                    break;
+                case 'L'||'l':
+                    this._ctx.lineTo(typePoints[i].point.x, typePoints[i].point.y);
+                    break;
+                case 'A'||'a':
+                    this._ctx.arc(typePoints[i].point[0].x, typePoints[i].point[0].y, typePoints[i].point[1], typePoints[i].point[2], typePoints[i].point[3]);
+                    break;
+
+                default:
+                    this._ctx.lineTo(typePoints[i].point.x, typePoints[i].point.y);
+            }            
         }
+        v._closePath ? this._ctx.closePath() : false;
+        this._drawStyle(v)
     },
 
-    //渲染圆方法
-    _circle : function(v){
-
-        this._ctx.beginPath();
-        this._ctx.arc(v.center.x, v.center.y, v.radius, 0, Math.PI * 2, true);
-        this._ctx.closePath();
-
-        this._ctx.globalAlpha = v.opciaty;
-        this._ctx.fillStyle = v.fillStyle;
-        this._ctx.fill();
-
+    //给图形(路径)添加样式
+    _drawStyle : function(v){
+        if(v.opciaty > 0){
+            this._ctx.globalAlpha = v.opciaty;
+            this._ctx.fillStyle = v.fillStyle;
+            this._ctx.fill();
+        }
         if(v.strokeWidth > 0 && v.strokeOpciaty > 0){
             this._ctx.globalAlpha = v.strokeOpciaty;
             this._ctx.strokeStyle = v.strokeStyle;

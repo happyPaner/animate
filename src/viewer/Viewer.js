@@ -13,4 +13,6 @@ Animate.Viewer = function(id){
 
     this.container = container;
     this.canvas = canvas;
+
+    Animate._event = new Animate.Event(canvas)
 }

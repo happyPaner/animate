@@ -1,0 +1,32 @@
+{
+  "name": "canvas-animate",
+  "version": "0.0.1",
+  "description": "canvas animate js library",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/happyPaner/animate.git"
+  },
+  "keywords": [
+    "canvas",
+    "animate",
+    "path"
+  ],
+  "author": "Paner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/happyPaner/animate/issues"
+  },
+  "homepage": "https://github.com/happyPaner/animate#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-uglify": "^2.0.0"
+  }
+}
