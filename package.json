@@ -1,5 +1,5 @@
 {
-  "name": "canvas-animate",
+  "name": "Animate",
   "version": "0.0.1",
   "description": "canvas animate js library",
   "main": "index.js",
@@ -19,7 +19,7 @@
     "animate",
     "path"
   ],
-  "author": "Paner",
+  "author": "happyPaner",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/happyPaner/animate/issues"
