@@ -14,6 +14,7 @@ Animate.Polyline = function(points, options){
     options.strokeOpciaty ? options.strokeOpciaty : options.strokeOpciaty = 1;
     Animate.Path.call(this, typePoints, options)
     this._closePath = false;
+    this.type = 'polyline';
 }
 
 Animate.extend(Animate.Polyline, Animate.Polygon);

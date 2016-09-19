@@ -11,6 +11,7 @@ Animate.Circle = function(center, radius, options){
     point.push(center, radius, 0, Math.PI*2);
     typePoint = new Animate.TypePoint(point,'A')
     Animate.Path.call(this, [typePoint], options);
+    this.type = 'circle';
 }
 
 //继承图形基础原型

@@ -8,6 +8,7 @@ Animate.Polygon = function(points, options){
     this.points = points ? points : [];
     var typePoints = this._getTypePoints(points);
     Animate.Path.call(this, typePoints, options);
+    this.type = 'polygon';
 }
 
 Animate.extend(Animate.Polygon, Animate.Path)
@@ -15,7 +16,7 @@ Animate.extend(Animate.Polygon, Animate.Path)
 //重新设置多边形关键点
 Animate.Polygon.prototype.setPoints = function(points){
     this.points = points ? points : [];
-    this._typePoints = this._getTypePoints(points);
+    this._typePoints = this._getTypePoints(this.points);
 }
 
 //获取多边形关键点

@@ -9,7 +9,8 @@ Animate.Path = function(typePoints, options){
 
     this._closePath = true;
     this._typePoints = typePoints ? typePoints : [];
-
+    this.type = 'path';
+    this.graphicType = 'path';
     this.show = options.show ? options.show : true;
     this.index = options.index ? options.index : 0;
     this.opciaty = options.opciaty || options.opciaty===0 ? options.opciaty : 1;
@@ -60,9 +61,14 @@ Animate.Path.prototype = {
         this.strokeOpciaty = strokeOpciaty ? strokeOpciaty : 1;
     },
 
+    //重新设置路径关键点参数
+    setPath : function(typePoints){
+        this._typePoints = typePoints;
+    },
+
     //把矩形添加到场景或者图形组中
     addTo : function(scene){
-        scene.add(this)
+        scene.add(this);
     },
 
     //添加绑定事件

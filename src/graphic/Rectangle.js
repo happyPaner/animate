@@ -5,12 +5,12 @@
  */ 
 
 Animate.Rectangle = function(lefttop, width, height, options){
-    this.type = 'rectangle';
     this.lefttop = lefttop ? lefttop : new Animate.Point(0,0);
     this.width = width ? width : 100;
     this.height = height ? height : 80;
     var typePoints = this._getTypePoints(lefttop, width, height)
     Animate.Path.call(this, typePoints, options)
+    this.type = 'rectangle';
 }
 
 //继承图形基础原型
