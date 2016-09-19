@@ -2,57 +2,36 @@ var gulp = require('gulp');
 var concat = require('gulp-concat')
 var uglify = require('gulp-uglify')
 
+var path = [
+        'Animate.js',
+        'base/Common.js',
+        'base/Point.js',
+        'base/TypePoint.js',
+        'base/Event.js',
+        'graphic/Path.js',
+        'graphic/Rectangle.js',
+        'graphic/circle.js',
+        'graphic/Polygon.js',
+        'graphic/Polyline.js',
+        'viewer/Renderer.js',
+        'viewer/Viewer.js',
+        'viewer/Scene.js',
+    ]
+
+
+path.forEach(function(v, i) {
+    path[i] = './src/' + v;
+    console.log(path[i])
+}, this);
+
+
 gulp.task('build', function() {
-    gulp.src([
-        'src/Animate.js',
-        'src/base/Common.js',
-        'src/base/Point.js',
-        'src/base/TypePoint.js',
-        'src/base/Event.js',
-        'src/graphic/Path.js',
-        'src/graphic/Rectangle.js',
-        'src/graphic/circle.js',
-        'src/graphic/Polygon.js',
-        'src/graphic/Polyline.js',
-        'src/viewer/Renderer.js',
-        'src/viewer/Viewer.js',
-        'src/viewer/Scene.js',
-    ])
+    gulp.src(path)
     .pipe(concat('Animate.js'))
     .pipe(gulp.dest('./build'))
 
-    gulp.src([
-        'src/Animate.js',
-        'src/base/Common.js',
-        'src/base/Point.js',
-        'src/base/TypePoint.js',
-        'src/base/Event.js',
-        'src/graphic/Path.js',
-        'src/graphic/Rectangle.js',
-        'src/graphic/circle.js',
-        'src/graphic/Polygon.js',
-        'src/graphic/Polyline.js',
-        'src/viewer/Renderer.js',
-        'src/viewer/Viewer.js',
-        'src/viewer/Scene.js',
-    ])
-    .pipe(concat('Animate.js'))
-    gulp.src([
-        'src/Animate.js',
-        'src/base/Common.js',
-        'src/base/Point.js',
-        'src/base/TypePoint.js',
-        'src/base/Event.js',
-        'src/graphic/Path.js',
-        'src/graphic/Rectangle.js',
-        'src/graphic/circle.js',
-        'src/graphic/Polygon.js',
-        'src/graphic/Polyline.js',
-        'src/viewer/Renderer.js',
-        'src/viewer/Viewer.js',
-        'src/viewer/Scene.js',
-    ])
-    .pipe(concat('Animate.js'))
-    .pipe(uglify('./build'))
-    .pipe(gulp.dest('./build'))
+    gulp.src(path)
+    .pipe(concat('Animate.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('./build')) 
 });

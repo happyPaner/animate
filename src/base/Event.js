@@ -47,7 +47,22 @@ Animate.Event.prototype = {
             path: path,
             func: func
         })
-    }, 
+    },
+
+    //移除事件
+    removeEvent : function(event, path, func){
+        if( this._contain[event] ){
+            var event = this._contain[event]
+            for(var i=0, len=event.length; i<len; i++){
+                if(func){
+                    path===event[i].path && func===event[i].func ? event.splice(i,1) : false;
+                }else{
+                    path===event[i].path ? event.splice(i,1) : false;
+                }
+            }
+        }
+        
+    },
 
     //获取事件发生位置
     _getEventPoint : function(e){
@@ -59,7 +74,7 @@ Animate.Event.prototype = {
     //执行左键基础事件
     _doBaseEvent : function(point, event){
         var k = this._pointIsInPath(point, this._contain[event]);
-        if(k || k===0) this._contain[event][k].func()
+        if(k || k===0) this._contain[event][k].func(point)
     },
 
     //检测事件发生在哪个路径中，返回路径在事件集合中的索引值
@@ -67,6 +82,14 @@ Animate.Event.prototype = {
         var indexs = [];
         paths.forEach(function(v, k){
             var typePoints = v.path._typePoints;
+            var path = v.path
+            this._eventCtx.save();
+
+            this._eventCtx.rotate(path.rotate)
+            this._eventCtx.translate(path.translate.x, path.translate.y)
+            this._eventCtx.translate(path.center.x*(1-path.scale.x), path.center.y*(1-path.scale.y))
+            this._eventCtx.scale(path.scale.x, path.scale.y)
+            
             this._eventCtx.beginPath();
             for(var i=0, len=typePoints.length; i<len; i++){
                 switch(typePoints[i].type){
@@ -85,6 +108,7 @@ Animate.Event.prototype = {
                 }            
             }
             v._closePath ? this._eventCtx.closePath() : false;
+            this._eventCtx.restore();
             if(v.path.opciaty > 0 && this._eventCtx.isPointInPath(point.x, point.y)){
                 indexs.push(k)                
             }else if(v.path.strokeWidth > 0 && v.path.strokeOpciaty > 0 && this._eventCtx.isPointInStroke(point.x, point.y)){

@@ -26,16 +26,24 @@ Animate.Renderer.prototype = {
     //渲染路径
     _path : function(v){
         var typePoints = v._typePoints;
+        this._ctx.save();
+
+        this._ctx.rotate(v.rotate)
+        this._ctx.translate(v.translate.x, v.translate.y)
+        this._ctx.translate(v.center.x*(1-v.scale.x), v.center.y*(1-v.scale.y))
+        this._ctx.scale(v.scale.x, v.scale.y)
+
+        
         this._ctx.beginPath();
         for(var i=0, len=typePoints.length; i<len; i++){
             switch(typePoints[i].type){
-                case 'M'||'m':
+                case 'M':
                     this._ctx.moveTo(typePoints[i].point.x, typePoints[i].point.y);
                     break;
-                case 'L'||'l':
+                case 'L':
                     this._ctx.lineTo(typePoints[i].point.x, typePoints[i].point.y);
                     break;
-                case 'A'||'a':
+                case 'A':
                     this._ctx.arc(typePoints[i].point[0].x, typePoints[i].point[0].y, typePoints[i].point[1], typePoints[i].point[2], typePoints[i].point[3]);
                     break;
 
@@ -44,11 +52,12 @@ Animate.Renderer.prototype = {
             }            
         }
         v._closePath ? this._ctx.closePath() : false;
-        this._drawStyle(v)
+        this._drawPathStyle(v)
+        this._ctx.restore()
     },
 
     //给图形(路径)添加样式
-    _drawStyle : function(v){
+    _drawPathStyle : function(v){
         if(v.opciaty > 0){
             this._ctx.globalAlpha = v.opciaty;
             this._ctx.fillStyle = v.fillStyle;
